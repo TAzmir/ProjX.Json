@@ -1,0 +1,56 @@
+name: release.prod.projx.json
+
+on:
+  push:
+    tags:
+      - '*' # Run when any tag is pushed
+
+jobs:
+  pack_and_publish:
+    name: Release ProjX.Json
+    runs-on: ubuntu-latest
+    id-token: write
+
+    env:
+      BUILD_CONFIGURATION: Release
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for tags and versioning
+
+      - name: setup sdk
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: dotnet restore
+        run: dotnet restore ProjX.Json/ProjX.Json.csproj
+
+      - name: get version
+        id: version
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          CLEAN_TAG=${TAG#v} # remove leading 'v' if present
+          echo "Package version: $CLEAN_TAG"
+          echo "version=$CLEAN_TAG" >> $GITHUB_OUTPUT
+
+      - name: pack
+        run: |
+          dotnet pack ProjX.Json/ProjX.Json.csproj \
+            --configuration $BUILD_CONFIGURATION \
+            --output ./packages \
+            /p:PackageVersion=${{ steps.version.outputs.version }}
+      
+      - name: login
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+      
+      - name: publish
+        run: |
+          dotnet nuget push "./packages/**/*.nupkg" \
+          --api-key ${{steps.login.outputs.NUGET_API_KEY}} \
+          --source "https://api.nuget.org/v3/index.json"
