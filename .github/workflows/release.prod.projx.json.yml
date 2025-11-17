@@ -9,7 +9,8 @@ jobs:
   pack_and_publish:
     name: Release ProjX.Json
     runs-on: ubuntu-latest
-    id-token: write
+    permissions:
+      id-token: write
 
     env:
       BUILD_CONFIGURATION: Release
