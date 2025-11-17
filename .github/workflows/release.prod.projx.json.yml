@@ -27,7 +27,7 @@ jobs:
           dotnet-version: '9.0.x'
 
       - name: dotnet restore
-        run: dotnet restore ProjX.Json/ProjX.Json.csproj
+        run: dotnet restore src/ProjX.Json/ProjX.Json.csproj
 
       - name: get version
         id: version
@@ -39,7 +39,7 @@ jobs:
 
       - name: pack
         run: |
-          dotnet pack ProjX.Json/ProjX.Json.csproj \
+          dotnet pack src/ProjX.Json/ProjX.Json.csproj \
             --configuration $BUILD_CONFIGURATION \
             --output ./packages \
             /p:PackageVersion=${{ steps.version.outputs.version }}
