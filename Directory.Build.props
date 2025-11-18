@@ -1,0 +1,19 @@
+<Project>
+	<PropertyGroup>
+		<Description>JSON converters and utilities for ProjX.</Description>
+
+		<EnablePackageValidation>true</EnablePackageValidation>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		
+		<PackageIcon>logo/projx_logo.png</PackageIcon>
+		<PackageTags>ProjX;JSON;Utilities</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Authors>Azmir Terzini</Authors>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\" />
+		<None Include="logo/projx_logo.png" Pack="true" PackagePath="\" />
+	</ItemGroup>
+</Project>
