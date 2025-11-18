@@ -1,1 +1,1 @@
-# JSON converters and utilities for ProjX.
+# JSON utilities for .net core ProjX.*.
