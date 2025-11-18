@@ -1,1 +1,0 @@
-# JSON utilities for .net core ProjX.*.
