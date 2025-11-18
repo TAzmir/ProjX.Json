@@ -6,10 +6,11 @@
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		
-		<PackageIcon>../../logo/projx_logo.png</PackageIcon>
+		<PackageIcon>projx_logo.png</PackageIcon>
 		<PackageTags>ProjX;JSON;Utilities</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<Authors>Azmir Terzini</Authors>
+		<Copyright>Copyright (c) Azmir Terzini</Copyright>
 	</PropertyGroup>
 
 	<ItemGroup>
