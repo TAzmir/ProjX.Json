@@ -5,7 +5,10 @@
 		<EnablePackageValidation>true</EnablePackageValidation>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		
+
+		<PackageReleaseNotes>
+			Full release notes can be found at https://github.com/TAzmir/ProjX.Json/releases
+		</PackageReleaseNotes>
 		<PackageIcon>projx_logo.png</PackageIcon>
 		<PackageTags>ProjX;JSON;Utilities;Converters</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
