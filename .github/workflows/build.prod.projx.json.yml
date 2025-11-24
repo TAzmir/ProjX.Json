@@ -1,0 +1,51 @@
+name: build.prod.projx.json
+
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+jobs:
+  pack_and_publish:
+    name: Build, Test & Pack ProjX.Json
+    runs-on: ubuntu-latest
+
+    env:
+      BUILD_CONFIGURATION: Release
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: setup sdk
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: dotnet restore
+        run: dotnet restore src/ProjX.Json/ProjX.Json.csproj
+
+      - name: Run tests
+        run: |
+          dotnet test
+
+      - name: get version
+        id: version
+        run: |
+          TAG=$(git describe --tags --abbrev=0)
+          CLEAN_TAG=${TAG#v}
+          echo "version=$CLEAN_TAG" >> $GITHUB_OUTPUT
+
+      - name: pack
+        run: |
+          dotnet pack src/ProjX.Json/ProjX.Json.csproj \
+            --configuration $BUILD_CONFIGURATION \
+            --output ./packages \
+            /p:PackageVersion=${{ steps.version.outputs.version }}
