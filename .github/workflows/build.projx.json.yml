@@ -1,4 +1,4 @@
-name: build.prod.projx.json
+name: build.projx.json
 
 on:
   pull_request:
@@ -11,8 +11,8 @@ on:
       - closed
 
 jobs:
-  pack_and_publish:
-    name: Build, Test & Pack ProjX.Json
+  build_and_pack:
+    name: Build ProjX.Json
     runs-on: ubuntu-latest
 
     env:
