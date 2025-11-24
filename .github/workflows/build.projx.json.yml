@@ -12,7 +12,6 @@ on:
 
 jobs:
   build_and_pack:
-    if: ${{ github.event.pull_request.draft == false }}
     name: Build ProjX.Json
     runs-on: ubuntu-latest
 
